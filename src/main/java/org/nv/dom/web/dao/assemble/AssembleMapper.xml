@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="org.nv.dom.web.dao.assembleMapper.AssembleMapper">
+
+	<insert id="saveSpeech" parameterType="Speech">
+	
+		INSERT INTO d_speech(
+			player_id,
+			character_id,
+			newspaper_id,
+			content,
+			create_time,
+			type
+		)
+		VALUES(
+			#{playerId},
+			#{characterId},
+			#{newspaperId},
+			#{content},
+			NOW(),
+			#{type}
+		)
+	
+	</insert>
+
+</mapper>
