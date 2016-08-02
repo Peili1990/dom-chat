@@ -2,6 +2,7 @@ package org.nv.dom.domain.speech;
 
 public class Speech {
 	
+	private String message;
 	private long id;
 	private long gameId;
 	private long newspaperId;
@@ -13,6 +14,13 @@ public class Speech {
 	private String content;
 	private String createTime;
 	
+	
+	public String getMessage() {
+		return message;
+	}
+	public void setMessage(String message) {
+		this.message = message;
+	}
 	public long getId() {
 		return id;
 	}

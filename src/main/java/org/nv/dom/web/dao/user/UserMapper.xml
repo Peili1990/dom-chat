@@ -9,8 +9,28 @@
 		FROM
 			d_player dp
 		WHERE
-			dp.gameId = #{gameId} AND dp.status ! = 9
+			dp.game_id = #{gameId} AND dp.status != 9
 	
 	</select>
+	
+	<insert id="saveOfflineSpeech">
+	
+		INSERT INTO d_offline_message(
+			user_id,
+			type,
+			speech_id,
+			status
+		)
+		VALUES
+			 <foreach item="userId" index="index" collection="users" separator=",">
+ 			(
+            #{userId},
+            1,
+            #{speechId},
+            0
+            )
+    		 </foreach>
+	
+	</insert>
 
 </mapper>
