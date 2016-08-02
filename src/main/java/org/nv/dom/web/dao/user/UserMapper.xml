@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="org.nv.dom.web.dao.user.UserMapper">
+
+	<select id="getUserIdListByGameId" parameterType="long" resultType="long">
+	
+		SELECT 
+			dp.user_id
+		FROM
+			d_player dp
+		WHERE
+			dp.gameId = #{gameId} AND dp.status ! = 9
+	
+	</select>
+
+</mapper>

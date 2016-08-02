@@ -20,8 +20,8 @@ public class AssembleController {
 	AssembleService assembleService;
 	
 	@ResponseBody
-	@RequestMapping(value = "/sendSpeech", method = RequestMethod.POST)
-	public Map<String, Object> sendSpeech(@ModelAttribute("speech") Speech speech, HttpSession session) {
+	@RequestMapping(value = "/sumbitSpeech", method = RequestMethod.POST)
+	public Map<String, Object> sumbitSpeech(@ModelAttribute("speech") Speech speech, HttpSession session) {
 		return assembleService.saveSpeech(speech);
 	}
 	

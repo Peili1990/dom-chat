@@ -10,7 +10,7 @@ Target Server Type    : MYSQL
 Target Server Version : 50624
 File Encoding         : 65001
 
-Date: 2016-08-01 19:20:02
+Date: 2016-08-02 17:46:57
 */
 
 SET FOREIGN_KEY_CHECKS=0;
@@ -168,7 +168,7 @@ CREATE TABLE `d_newspaper` (
   `create_time` datetime DEFAULT NULL,
   `update_time` datetime DEFAULT NULL,
   `type` int(1) unsigned zerofill DEFAULT '0' COMMENT '1 夜刊 2 日刊',
-  `status` int(1) DEFAULT NULL COMMENT '1 已发布 0 未发布',
+  `status` int(1) DEFAULT NULL COMMENT '2 已结束发言 1 已发布 0 未发布',
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=utf8;
 
@@ -179,6 +179,24 @@ INSERT INTO `d_newspaper` VALUES ('1', '5', '7月5日日刊（开版公告）', 
 INSERT INTO `d_newspaper` VALUES ('2', '1', '7月5日夜刊（开版公告）', '小镇受西部铁路公司200万美元投资垂青', '本市西部仅两站<br>维多利亚讯 据可靠消息，今日下午，西部铁路公司董事会发言人特理·亨德曼表明，其第二大股东亨利.刘易斯（左图）即将对本市行政区域内的维多利亚镇进行大规模投资，由铁路运输业带动铁矿、石油的初期计划已经草拟成案。经济学家称该举措即将带来临近地区就业的重整，治安专家则担心大额外来人员对本地区的影响。中部铁运则表明，在铁路运重创的6月后进行这种冒险之举不具长期眼光。<br>维多利亚镇普通镇民，书记官温彻斯特太太表示，“这预示一种时代的变化。当蒸汽机车最终被内燃机车取代的时候，我们知道有些东西不同了。”', '2版政治：在野党质疑政府监管<br>2版经济：周边带动理论 <br>2版金融：华尔街芝加哥工业指数上升24%  <br>5版 柏林会议进展不顺 <br>6版 清帝国使者离开纽约 <br>7版：维多利亚镇的介绍<br>8版 独立日烟火不慎造成男童落水 <br><br>4版<br>西部铁路公司收到匿名警告信 犯罪专家称或非无稽之谈 <br>芝加哥讯 西部铁路公司芝加哥分所近日收到恐吓信，据平克顿侦探所透露，此信来向可推为维多利亚镇。目前警方没有明确透露信的具体内容，但据称为某一组织的某些人员向西部铁路公司某些高层追索“欠款”，并扬言“你们，都得死”。 <br>有证券交易所表明，6月后的会计工作使证券持有人对西部铁路公司表示乐观，然而始终有声音质疑为何西部铁路公司能在6月的N.劳兄弟公司铁路重大事故后保持账面未有亏损。', '哈代死亡。<br><br>哈代遗言：', '<table><tbody><tr><td>珀利</td><td align=\"center\">伊卡</td><td align=\"right\">山纳</td></tr><tr><td></td><td></td><td align=\"right\">哈代</td></tr><tr><td>马丁</td><td></td><td align=\"right\">爱德华</td></tr><tr><td>昆西</td><td></td><td align=\"right\">叶什（妹）</td></tr><tr><td>温切斯特</td><td></td><td align=\"right\">卓尔</td></tr><tr><td>叶什（兄）</td><td></td><td align=\"right\">白瑞摩</td></tr><tr><td>厄金特</td><td></td><td align=\"right\">赫本</td></tr><tr><td>奎勒</td><td></td><td align=\"right\">安德安纳</td></tr><tr><td>伊奥克</td><td align=\"center\">斯达福斯</td><td align=\"right\">科尔比</td></tr></tbody></table>', '2016-07-27 17:07:07', '2016-07-28 15:38:24', '1', '1');
 
 -- ----------------------------
+-- Table structure for `d_offline_message`
+-- ----------------------------
+DROP TABLE IF EXISTS `d_offline_message`;
+CREATE TABLE `d_offline_message` (
+  `id` bigint(11) NOT NULL AUTO_INCREMENT,
+  `user_id` bigint(11) DEFAULT NULL,
+  `type` int(1) DEFAULT NULL COMMENT '1 未读发言 2 未读私聊',
+  `speech_id` bigint(11) DEFAULT NULL,
+  `status` int(1) DEFAULT NULL COMMENT '0 未读 1已读',
+  `content` text,
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+-- ----------------------------
+-- Records of d_offline_message
+-- ----------------------------
+
+-- ----------------------------
 -- Table structure for `d_player`
 -- ----------------------------
 DROP TABLE IF EXISTS `d_player`;
@@ -187,7 +205,7 @@ CREATE TABLE `d_player` (
   `user_id` bigint(11) DEFAULT NULL,
   `role` varchar(32) DEFAULT NULL,
   `game_id` bigint(11) DEFAULT NULL,
-  `status` int(5) DEFAULT NULL COMMENT '0 已报名 1待选外在角色 2待3选1 3已选外在身份 4已查看实际身份',
+  `status` int(5) DEFAULT NULL COMMENT '0 已报名 1待选外在角色 2待3选1 3已选外在身份 4已查看实际身份 9 已结束',
   `apply_time` datetime NOT NULL,
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB AUTO_INCREMENT=37 DEFAULT CHARSET=utf8;
@@ -321,11 +339,12 @@ CREATE TABLE `d_speech` (
   `create_time` datetime DEFAULT NULL,
   `type` int(1) DEFAULT NULL COMMENT '1 发言 2 动作',
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8;
 
 -- ----------------------------
 -- Records of d_speech
 -- ----------------------------
+INSERT INTO `d_speech` VALUES ('1', '10', '40', '2', '123', '2016-08-02 16:14:20', '1');
 
 -- ----------------------------
 -- Table structure for `d_user`
