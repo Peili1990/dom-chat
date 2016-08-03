@@ -17,17 +17,15 @@
 	
 		INSERT INTO d_offline_message(
 			user_id,
-			type,
 			speech_id,
-			status
+			newspaper_id
 		)
 		VALUES
 			 <foreach item="userId" index="index" collection="users" separator=",">
  			(
             #{userId},
-            1,
             #{speechId},
-            0
+            #(newspaperId)
             )
     		 </foreach>
 	

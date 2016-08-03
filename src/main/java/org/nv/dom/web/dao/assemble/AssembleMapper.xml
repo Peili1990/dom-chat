@@ -17,7 +17,7 @@
 			#{characterId},
 			#{newspaperId},
 			#{content},
-			NOW(),
+			#{createTime},
 			#{type}
 		)
 	

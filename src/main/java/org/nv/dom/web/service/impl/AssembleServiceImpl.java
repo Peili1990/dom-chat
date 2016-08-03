@@ -1,5 +1,7 @@
 package org.nv.dom.web.service.impl;
 
+import java.text.SimpleDateFormat;
+import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -33,6 +35,7 @@ public class AssembleServiceImpl implements AssembleService {
 	public Map<String, Object> saveSpeech(final Speech speech) {
 		Map<String, Object> result = new HashMap<String, Object>();
 		try{
+			speech.setCreateTime(new SimpleDateFormat("yyyy-MM-dd HH:mm:ss").format(new Date()));
 			assembleMapper.saveSpeech(speech);
 			result.put(PageParamType.BUSINESS_STATUS, 1);
 			result.put(PageParamType.BUSINESS_MESSAGE, "保存发言成功！");
