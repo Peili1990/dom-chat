@@ -2,6 +2,7 @@ package org.nv.dom.websocket;
 
 import java.io.IOException;
 
+import javax.websocket.CloseReason;
 import javax.websocket.OnClose;
 import javax.websocket.OnMessage;
 import javax.websocket.OnOpen;
@@ -48,7 +49,7 @@ public class WebSocketChat {
     }
 
     @OnClose
-    public void onClose (@PathParam("userId") long userId, Session session) {
+    public void onClose (@PathParam("userId") long userId, CloseReason closeReason, Session session) {
     	logger.info("Websocket Close Connection:" + userId);
     	SessionUtils.remove(userId);
     }

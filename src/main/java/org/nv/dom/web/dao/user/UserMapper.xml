@@ -15,7 +15,7 @@
 	
 	<insert id="saveOfflineSpeech">
 	
-		INSERT INTO d_offline_message(
+		INSERT INTO d_offline_speech(
 			user_id,
 			speech_id,
 			newspaper_id
@@ -25,7 +25,7 @@
  			(
             #{userId},
             #{speechId},
-            #(newspaperId)
+            #{newspaperId}
             )
     		 </foreach>
 	
