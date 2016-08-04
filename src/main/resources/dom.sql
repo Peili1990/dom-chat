@@ -10,7 +10,7 @@ Target Server Type    : MYSQL
 Target Server Version : 50624
 File Encoding         : 65001
 
-Date: 2016-08-02 17:46:57
+Date: 2016-08-04 18:13:10
 */
 
 SET FOREIGN_KEY_CHECKS=0;
@@ -25,6 +25,7 @@ CREATE TABLE `d_character` (
   `sex` int(1) DEFAULT NULL COMMENT '0 男 1 女 2 可男可女',
   `age` int(5) DEFAULT NULL,
   `avatar` varchar(255) DEFAULT NULL,
+  `killer_avatar` varchar(255) DEFAULT NULL,
   `has_sp` varchar(1) DEFAULT NULL,
   `tag` varchar(10) DEFAULT NULL,
   PRIMARY KEY (`id`)
@@ -33,60 +34,60 @@ CREATE TABLE `d_character` (
 -- ----------------------------
 -- Records of d_character
 -- ----------------------------
-INSERT INTO `d_character` VALUES ('1', '爱德华', '0', '24', null, '1', null);
-INSERT INTO `d_character` VALUES ('2', '马丁', '0', '31', null, '0', null);
-INSERT INTO `d_character` VALUES ('3', '托马斯', '0', '29', null, '0', null);
-INSERT INTO `d_character` VALUES ('4', '白瑞摩', '0', '33', null, '0', null);
-INSERT INTO `d_character` VALUES ('5', '伊卡', '1', '20', null, '1', null);
-INSERT INTO `d_character` VALUES ('6', '珀利', '1', '24', null, '0', null);
-INSERT INTO `d_character` VALUES ('7', '莫利', '1', '28', null, '1', null);
-INSERT INTO `d_character` VALUES ('8', '沃兹沃斯', '1', '27', null, '0', null);
-INSERT INTO `d_character` VALUES ('9', '伊奥克', '0', '21', null, '0', null);
-INSERT INTO `d_character` VALUES ('10', '奈斯', '0', '50', null, '0', null);
-INSERT INTO `d_character` VALUES ('11', '曼顿', '0', '56', null, '0', null);
-INSERT INTO `d_character` VALUES ('12', '朗斯特里特', '0', '43', null, '0', null);
-INSERT INTO `d_character` VALUES ('13', '普拉马逊斯', '0', '45', null, '0', null);
-INSERT INTO `d_character` VALUES ('14', '舒马赫', '1', '53', null, '0', null);
-INSERT INTO `d_character` VALUES ('15', '道格拉斯', '1', '47', null, '0', null);
-INSERT INTO `d_character` VALUES ('16', '科尔比', '1', '40', null, '0', null);
-INSERT INTO `d_character` VALUES ('17', '欧希玛', '1', '49', null, '0', null);
-INSERT INTO `d_character` VALUES ('18', '梅特卡夫', '0', '38', null, '0', null);
-INSERT INTO `d_character` VALUES ('19', '哈代', '0', '63', null, '1', null);
-INSERT INTO `d_character` VALUES ('20', '盖茨', '0', '66', null, '0', null);
-INSERT INTO `d_character` VALUES ('21', '斯达福斯', '1', '67', null, '0', null);
-INSERT INTO `d_character` VALUES ('22', '托兰', '1', '74', null, '0', null);
-INSERT INTO `d_character` VALUES ('23', '查西', '0', '71', null, '0', null);
-INSERT INTO `d_character` VALUES ('24', '斯布兰奇', '1', '64', null, '0', null);
-INSERT INTO `d_character` VALUES ('25', '坦尼森', '1', '69', null, '0', null);
-INSERT INTO `d_character` VALUES ('26', '德雷顿', '1', '65', null, '0', null);
-INSERT INTO `d_character` VALUES ('27', '奎勒', '0', '78', null, '0', null);
-INSERT INTO `d_character` VALUES ('28', '威廉姆斯', '0', '48', null, '1', null);
-INSERT INTO `d_character` VALUES ('29', '尤里', '0', '36', null, '0', null);
-INSERT INTO `d_character` VALUES ('30', '安德安纳', '0', '30', null, '0', null);
-INSERT INTO `d_character` VALUES ('31', '劳伦', '0', '52', null, '1', null);
-INSERT INTO `d_character` VALUES ('32', '豪', '1', '46', null, '0', null);
-INSERT INTO `d_character` VALUES ('33', '阿修', '1', '45', null, '0', null);
-INSERT INTO `d_character` VALUES ('34', '卡布莱', '1', '55', null, '0', null);
-INSERT INTO `d_character` VALUES ('35', '叶什（妹）', '1', '22', null, '0', null);
-INSERT INTO `d_character` VALUES ('36', '扬', '1', '26', null, '0', null);
-INSERT INTO `d_character` VALUES ('37', '赫本', '1', '23', null, '0', null);
-INSERT INTO `d_character` VALUES ('38', '卓尔', '0', '39', null, '1', null);
-INSERT INTO `d_character` VALUES ('39', '艾尔威', '1', '73', null, '0', null);
-INSERT INTO `d_character` VALUES ('40', '山纳', '0', '54', null, '0', null);
-INSERT INTO `d_character` VALUES ('41', '叶什（兄）', '0', '35', null, '1', null);
-INSERT INTO `d_character` VALUES ('42', '钱德勒', '2', '41', null, '0', null);
-INSERT INTO `d_character` VALUES ('43', '霍尔', '1', '20', null, '1', null);
-INSERT INTO `d_character` VALUES ('44', '恩菲尔德', '1', '0', null, '0', null);
-INSERT INTO `d_character` VALUES ('45', '布莱克', '0', '80', null, '0', null);
-INSERT INTO `d_character` VALUES ('46', '李', '0', '62', null, '0', null);
-INSERT INTO `d_character` VALUES ('47', '厄金特', '1', '76', null, '0', null);
-INSERT INTO `d_character` VALUES ('48', '昆西', '1', '34', null, '0', null);
-INSERT INTO `d_character` VALUES ('49', '马克唐', '0', '77', null, '0', null);
-INSERT INTO `d_character` VALUES ('50', '约翰逊', '1', '51', null, '1', null);
-INSERT INTO `d_character` VALUES ('51', '欧内斯特', '1', '60', null, '0', null);
-INSERT INTO `d_character` VALUES ('52', '浮士德', '0', '58', null, '0', null);
-INSERT INTO `d_character` VALUES ('53', '德.圣地亚哥', '0', '72', null, '0', null);
-INSERT INTO `d_character` VALUES ('54', '温切斯特', '2', '68', null, '0', null);
+INSERT INTO `d_character` VALUES ('1', '爱德华', '0', '24', null, null, '1', null);
+INSERT INTO `d_character` VALUES ('2', '马丁', '0', '31', null, null, '0', null);
+INSERT INTO `d_character` VALUES ('3', '托马斯', '0', '29', null, null, '0', null);
+INSERT INTO `d_character` VALUES ('4', '白瑞摩', '0', '33', null, null, '0', null);
+INSERT INTO `d_character` VALUES ('5', '伊卡', '1', '20', null, null, '1', null);
+INSERT INTO `d_character` VALUES ('6', '珀利', '1', '24', null, null, '0', null);
+INSERT INTO `d_character` VALUES ('7', '莫利', '1', '28', null, null, '1', null);
+INSERT INTO `d_character` VALUES ('8', '沃兹沃斯', '1', '27', null, null, '0', null);
+INSERT INTO `d_character` VALUES ('9', '伊奥克', '0', '21', null, null, '0', null);
+INSERT INTO `d_character` VALUES ('10', '奈斯', '0', '50', null, null, '0', null);
+INSERT INTO `d_character` VALUES ('11', '曼顿', '0', '56', null, null, '0', null);
+INSERT INTO `d_character` VALUES ('12', '朗斯特里特', '0', '43', null, null, '0', null);
+INSERT INTO `d_character` VALUES ('13', '普拉马逊斯', '0', '45', null, null, '0', null);
+INSERT INTO `d_character` VALUES ('14', '舒马赫', '1', '53', null, null, '0', null);
+INSERT INTO `d_character` VALUES ('15', '道格拉斯', '1', '47', null, null, '0', null);
+INSERT INTO `d_character` VALUES ('16', '科尔比', '1', '40', null, null, '0', null);
+INSERT INTO `d_character` VALUES ('17', '欧希玛', '1', '49', null, null, '0', null);
+INSERT INTO `d_character` VALUES ('18', '梅特卡夫', '0', '38', null, null, '0', null);
+INSERT INTO `d_character` VALUES ('19', '哈代', '0', '63', null, null, '1', null);
+INSERT INTO `d_character` VALUES ('20', '盖茨', '0', '66', null, null, '0', null);
+INSERT INTO `d_character` VALUES ('21', '斯达福斯', '1', '67', null, null, '0', null);
+INSERT INTO `d_character` VALUES ('22', '托兰', '1', '74', null, null, '0', null);
+INSERT INTO `d_character` VALUES ('23', '查西', '0', '71', null, null, '0', null);
+INSERT INTO `d_character` VALUES ('24', '斯布兰奇', '1', '64', null, null, '0', null);
+INSERT INTO `d_character` VALUES ('25', '坦尼森', '1', '69', null, null, '0', null);
+INSERT INTO `d_character` VALUES ('26', '德雷顿', '1', '65', null, null, '0', null);
+INSERT INTO `d_character` VALUES ('27', '奎勒', '0', '78', null, null, '0', null);
+INSERT INTO `d_character` VALUES ('28', '威廉姆斯', '0', '48', null, null, '1', null);
+INSERT INTO `d_character` VALUES ('29', '尤里', '0', '36', null, null, '0', null);
+INSERT INTO `d_character` VALUES ('30', '安德安纳', '0', '30', null, null, '0', null);
+INSERT INTO `d_character` VALUES ('31', '劳伦', '0', '52', null, null, '1', null);
+INSERT INTO `d_character` VALUES ('32', '豪', '1', '46', null, null, '0', null);
+INSERT INTO `d_character` VALUES ('33', '阿修', '1', '45', null, null, '0', null);
+INSERT INTO `d_character` VALUES ('34', '卡布莱', '1', '55', null, null, '0', null);
+INSERT INTO `d_character` VALUES ('35', '叶什（妹）', '1', '22', null, null, '0', null);
+INSERT INTO `d_character` VALUES ('36', '扬', '1', '26', null, null, '0', null);
+INSERT INTO `d_character` VALUES ('37', '赫本', '1', '23', null, null, '0', null);
+INSERT INTO `d_character` VALUES ('38', '卓尔', '0', '39', null, null, '1', null);
+INSERT INTO `d_character` VALUES ('39', '艾尔威', '1', '73', null, null, '0', null);
+INSERT INTO `d_character` VALUES ('40', '山纳', '0', '54', null, null, '0', null);
+INSERT INTO `d_character` VALUES ('41', '叶什（兄）', '0', '35', null, null, '1', null);
+INSERT INTO `d_character` VALUES ('42', '钱德勒', '2', '41', null, null, '0', null);
+INSERT INTO `d_character` VALUES ('43', '霍尔', '1', '20', null, null, '1', null);
+INSERT INTO `d_character` VALUES ('44', '恩菲尔德', '1', '0', null, null, '0', null);
+INSERT INTO `d_character` VALUES ('45', '布莱克', '0', '80', null, null, '0', null);
+INSERT INTO `d_character` VALUES ('46', '李', '0', '62', null, null, '0', null);
+INSERT INTO `d_character` VALUES ('47', '厄金特', '1', '76', null, null, '0', null);
+INSERT INTO `d_character` VALUES ('48', '昆西', '1', '34', null, null, '0', null);
+INSERT INTO `d_character` VALUES ('49', '马克唐', '0', '77', null, null, '0', null);
+INSERT INTO `d_character` VALUES ('50', '约翰逊', '1', '51', null, null, '1', null);
+INSERT INTO `d_character` VALUES ('51', '欧内斯特', '1', '60', null, null, '0', null);
+INSERT INTO `d_character` VALUES ('52', '浮士德', '0', '58', null, null, '0', null);
+INSERT INTO `d_character` VALUES ('53', '德.圣地亚哥', '0', '72', null, null, '0', null);
+INSERT INTO `d_character` VALUES ('54', '温切斯特', '2', '68', null, null, '0', null);
 
 -- ----------------------------
 -- Table structure for `d_form`
@@ -176,25 +177,58 @@ CREATE TABLE `d_newspaper` (
 -- Records of d_newspaper
 -- ----------------------------
 INSERT INTO `d_newspaper` VALUES ('1', '5', '7月5日日刊（开版公告）', '小镇受西部铁路公司200万美元投资垂青', '本市西部仅两站<br>维多利亚讯 据可靠消息，今日下午，西部铁路公司董事会发言人特理·亨德曼表明，其第二大股东亨利.刘易斯（左图）即将对本市行政区域内的维多利亚镇进行大规模投资，由铁路运输业带动铁矿、石油的初期计划已经草拟成案。经济学家称该举措即将带来临近地区就业的重整，治安专家则担心大额外来人员对本地区的影响。中部铁运则表明，在铁路运重创的6月后进行这种冒险之举不具长期眼光。<br>维多利亚镇普通镇民，书记官温彻斯特太太表示，“这预示一种时代的变化。当蒸汽机车最终被内燃机车取代的时候，我们知道有些东西不同了。”', '2版政治：在野党质疑政府监管<br>2版经济：周边带动理论 <br>2版金融：华尔街芝加哥工业指数上升24% <br>7版：维多利亚镇的介绍 <br><br>4版<br>西部铁路公司收到匿名警告信 犯罪专家称或非无稽之谈 <br>芝加哥讯 西部铁路公司芝加哥分所近日收到恐吓信，据平克顿侦探所透露，此信来向可推为维多利亚镇。目前警方没有明确透露信的具体内容，但据称为某一组织的某些人员向西部铁路公司某些高层追索“欠款”，并扬言“你们，都得死”。 <br>有证券交易所表明，6月后的会计工作使证券持有人对西部铁路公司表示乐观，然而始终有声音质疑为何西部铁路公司能在6月的N.劳兄弟公司铁路重大事故后保持账面未有亏损。', '哈代死亡。<br><br>哈代遗言：', '<table>\r\n				<tbody>\r\n					<tr>\r\n						<td>恩菲尔德</td>\r\n						<td align=\"center\">霍尔</td>\r\n						<td align=\"right\">欧内斯特</td>\r\n					</tr>\r\n					<tr>\r\n						<td></td>\r\n						<td></td>\r\n						<td align=\"right\">叶妹</td>\r\n					</tr>\r\n					<tr>\r\n						<td>叶兄</td>\r\n						<td></td>\r\n						<td align=\"right\">安德安纳</td>\r\n					</tr>\r\n					<tr>\r\n						<td>哈代【死亡】</td>\r\n						<td></td>\r\n						<td align=\"right\">马克唐</td>\r\n					</tr>\r\n					<tr>\r\n						<td>白瑞摩</td>\r\n						<td></td>\r\n						<td align=\"right\">圣地亚哥</td>\r\n					</tr>\r\n					<tr>\r\n						<td>赫本</td>\r\n						<td></td>\r\n						<td align=\"right\">科尔比</td>\r\n					</tr>\r\n					<tr>\r\n						<td>莫利</td>\r\n						<td></td>\r\n						<td align=\"right\">（布莱克）</td>\r\n					</tr>\r\n					<tr>\r\n						<td>普拉马逊斯</td>\r\n						<td></td>\r\n						<td align=\"right\">昆西</td>\r\n					</tr>\r\n					<tr>\r\n						<td>艾尔威</td>\r\n						<td align=\"center\">劳伦</td>\r\n						<td align=\"right\">伊卡</td>\r\n					</tr>\r\n				</tbody>\r\n			</table>', '2016-07-25 18:03:37', null, null, '1');
-INSERT INTO `d_newspaper` VALUES ('2', '1', '7月5日夜刊（开版公告）', '小镇受西部铁路公司200万美元投资垂青', '本市西部仅两站<br>维多利亚讯 据可靠消息，今日下午，西部铁路公司董事会发言人特理·亨德曼表明，其第二大股东亨利.刘易斯（左图）即将对本市行政区域内的维多利亚镇进行大规模投资，由铁路运输业带动铁矿、石油的初期计划已经草拟成案。经济学家称该举措即将带来临近地区就业的重整，治安专家则担心大额外来人员对本地区的影响。中部铁运则表明，在铁路运重创的6月后进行这种冒险之举不具长期眼光。<br>维多利亚镇普通镇民，书记官温彻斯特太太表示，“这预示一种时代的变化。当蒸汽机车最终被内燃机车取代的时候，我们知道有些东西不同了。”', '2版政治：在野党质疑政府监管<br>2版经济：周边带动理论 <br>2版金融：华尔街芝加哥工业指数上升24%  <br>5版 柏林会议进展不顺 <br>6版 清帝国使者离开纽约 <br>7版：维多利亚镇的介绍<br>8版 独立日烟火不慎造成男童落水 <br><br>4版<br>西部铁路公司收到匿名警告信 犯罪专家称或非无稽之谈 <br>芝加哥讯 西部铁路公司芝加哥分所近日收到恐吓信，据平克顿侦探所透露，此信来向可推为维多利亚镇。目前警方没有明确透露信的具体内容，但据称为某一组织的某些人员向西部铁路公司某些高层追索“欠款”，并扬言“你们，都得死”。 <br>有证券交易所表明，6月后的会计工作使证券持有人对西部铁路公司表示乐观，然而始终有声音质疑为何西部铁路公司能在6月的N.劳兄弟公司铁路重大事故后保持账面未有亏损。', '哈代死亡。<br><br>哈代遗言：', '<table><tbody><tr><td>珀利</td><td align=\"center\">伊卡</td><td align=\"right\">山纳</td></tr><tr><td></td><td></td><td align=\"right\">哈代</td></tr><tr><td>马丁</td><td></td><td align=\"right\">爱德华</td></tr><tr><td>昆西</td><td></td><td align=\"right\">叶什（妹）</td></tr><tr><td>温切斯特</td><td></td><td align=\"right\">卓尔</td></tr><tr><td>叶什（兄）</td><td></td><td align=\"right\">白瑞摩</td></tr><tr><td>厄金特</td><td></td><td align=\"right\">赫本</td></tr><tr><td>奎勒</td><td></td><td align=\"right\">安德安纳</td></tr><tr><td>伊奥克</td><td align=\"center\">斯达福斯</td><td align=\"right\">科尔比</td></tr></tbody></table>', '2016-07-27 17:07:07', '2016-07-28 15:38:24', '1', '1');
+INSERT INTO `d_newspaper` VALUES ('2', '1', '7月5日夜刊（开版公告）', '小镇受西部铁路公司200万美元投资垂青', '本市西部仅两站<br>维多利亚讯 据可靠消息，今日下午，西部铁路公司董事会发言人特理·亨德曼表明，其第二大股东亨利.刘易斯（左图）即将对本市行政区域内的维多利亚镇进行大规模投资，由铁路运输业带动铁矿、石油的初期计划已经草拟成案。经济学家称该举措即将带来临近地区就业的重整，治安专家则担心大额外来人员对本地区的影响。中部铁运则表明，在铁路运重创的6月后进行这种冒险之举不具长期眼光。<br>维多利亚镇普通镇民，书记官温彻斯特太太表示，“这预示一种时代的变化。当蒸汽机车最终被内燃机车取代的时候，我们知道有些东西不同了。”', '2版政治：在野党质疑政府监管<br>2版经济：周边带动理论 <br>2版金融：华尔街芝加哥工业指数上升24%  <br>5版 柏林会议进展不顺 <br>6版 清帝国使者离开纽约 <br>7版：维多利亚镇的介绍<br>8版 独立日烟火不慎造成男童落水 <br><br>4版<br>西部铁路公司收到匿名警告信 犯罪专家称或非无稽之谈 <br>芝加哥讯 西部铁路公司芝加哥分所近日收到恐吓信，据平克顿侦探所透露，此信来向可推为维多利亚镇。目前警方没有明确透露信的具体内容，但据称为某一组织的某些人员向西部铁路公司某些高层追索“欠款”，并扬言“你们，都得死”。 <br>有证券交易所表明，6月后的会计工作使证券持有人对西部铁路公司表示乐观，然而始终有声音质疑为何西部铁路公司能在6月的N.劳兄弟公司铁路重大事故后保持账面未有亏损。', '哈代死亡。<br><br>哈代遗言：', '<table><tbody><tr><td>珀利</td><td align=\"center\">伊卡</td><td align=\"right\">山纳</td></tr><tr><td></td><td></td><td align=\"right\">哈代</td></tr><tr><td>马丁</td><td></td><td align=\"right\">爱德华</td></tr><tr><td>昆西</td><td></td><td align=\"right\">叶什（妹）</td></tr><tr><td>温切斯特</td><td></td><td align=\"right\">卓尔</td></tr><tr><td>叶什（兄）</td><td></td><td align=\"right\">白瑞摩</td></tr><tr><td>厄金特</td><td></td><td align=\"right\">赫本</td></tr><tr><td>奎勒</td><td></td><td align=\"right\">安德安纳</td></tr><tr><td>伊奥克</td><td align=\"center\">斯达福斯</td><td align=\"right\">科尔比</td></tr></tbody></table>', '2016-07-27 17:07:07', '2016-07-28 15:38:24', '2', '1');
 
 -- ----------------------------
 -- Table structure for `d_offline_message`
 -- ----------------------------
 DROP TABLE IF EXISTS `d_offline_message`;
 CREATE TABLE `d_offline_message` (
-  `id` bigint(11) NOT NULL AUTO_INCREMENT,
+  `id` bigint(11) NOT NULL,
   `user_id` bigint(11) DEFAULT NULL,
-  `type` int(1) DEFAULT NULL COMMENT '1 未读发言 2 未读私聊',
-  `speech_id` bigint(11) DEFAULT NULL,
-  `status` int(1) DEFAULT NULL COMMENT '0 未读 1已读',
+  `chat_id` bigint(11) DEFAULT NULL,
   `content` text,
+  `createTime` datetime DEFAULT NULL,
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 -- ----------------------------
 -- Records of d_offline_message
 -- ----------------------------
+
+-- ----------------------------
+-- Table structure for `d_offline_speech`
+-- ----------------------------
+DROP TABLE IF EXISTS `d_offline_speech`;
+CREATE TABLE `d_offline_speech` (
+  `id` bigint(11) NOT NULL AUTO_INCREMENT,
+  `user_id` bigint(11) DEFAULT NULL,
+  `speech_id` bigint(11) DEFAULT NULL,
+  `newspaper_id` bigint(11) DEFAULT NULL,
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB AUTO_INCREMENT=865 DEFAULT CHARSET=utf8;
+
+-- ----------------------------
+-- Records of d_offline_speech
+-- ----------------------------
+INSERT INTO `d_offline_speech` VALUES ('847', '4', '52', null);
+INSERT INTO `d_offline_speech` VALUES ('848', '6', '52', null);
+INSERT INTO `d_offline_speech` VALUES ('849', '5', '52', null);
+INSERT INTO `d_offline_speech` VALUES ('850', '7', '52', null);
+INSERT INTO `d_offline_speech` VALUES ('851', '8', '52', null);
+INSERT INTO `d_offline_speech` VALUES ('852', '9', '52', null);
+INSERT INTO `d_offline_speech` VALUES ('853', '10', '52', null);
+INSERT INTO `d_offline_speech` VALUES ('854', '11', '52', null);
+INSERT INTO `d_offline_speech` VALUES ('855', '12', '52', null);
+INSERT INTO `d_offline_speech` VALUES ('856', '13', '52', null);
+INSERT INTO `d_offline_speech` VALUES ('857', '14', '52', null);
+INSERT INTO `d_offline_speech` VALUES ('858', '15', '52', null);
+INSERT INTO `d_offline_speech` VALUES ('859', '16', '52', null);
+INSERT INTO `d_offline_speech` VALUES ('860', '17', '52', null);
+INSERT INTO `d_offline_speech` VALUES ('861', '18', '52', null);
+INSERT INTO `d_offline_speech` VALUES ('862', '19', '52', null);
+INSERT INTO `d_offline_speech` VALUES ('863', '20', '52', null);
+INSERT INTO `d_offline_speech` VALUES ('864', '21', '52', null);
 
 -- ----------------------------
 -- Table structure for `d_player`
@@ -336,15 +370,15 @@ CREATE TABLE `d_speech` (
   `character_id` int(5) DEFAULT NULL,
   `newspaper_id` bigint(11) DEFAULT NULL,
   `content` text,
-  `create_time` datetime DEFAULT NULL,
+  `create_time` varchar(32) DEFAULT NULL,
   `type` int(1) DEFAULT NULL COMMENT '1 发言 2 动作',
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=53 DEFAULT CHARSET=utf8;
 
 -- ----------------------------
 -- Records of d_speech
 -- ----------------------------
-INSERT INTO `d_speech` VALUES ('1', '10', '40', '2', '123', '2016-08-02 16:14:20', '1');
+INSERT INTO `d_speech` VALUES ('52', '10', '40', '2', '说一句话<br>说两句话', '2016-08-04 17:31:50', '1');
 
 -- ----------------------------
 -- Table structure for `d_user`
