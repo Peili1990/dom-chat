@@ -6,7 +6,8 @@
 	
 		INSERT INTO d_speech(
 			player_id,
-			character_id,
+			character_name,
+			character_avatar,
 			newspaper_id,
 			content,
 			create_time,
@@ -14,7 +15,8 @@
 		)
 		VALUES(
 			#{playerId},
-			#{characterId},
+			#{characterName},
+			#{characterAvatar},
 			#{newspaperId},
 			#{content},
 			#{createTime},

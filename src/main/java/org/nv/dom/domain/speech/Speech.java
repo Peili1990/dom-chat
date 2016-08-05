@@ -7,7 +7,7 @@ public class Speech {
 	private long gameId;
 	private long newspaperId;
 	private long playerId;
-	private long characterId;
+	private String characterAvatar;
 	private String characterName;
 	private String avatar;
 	private Integer type;
@@ -45,11 +45,11 @@ public class Speech {
 	public void setPlayerId(long playerId) {
 		this.playerId = playerId;
 	}
-	public long getCharacterId() {
-		return characterId;
+	public String getCharacterAvatar() {
+		return characterAvatar;
 	}
-	public void setCharacterId(long characterId) {
-		this.characterId = characterId;
+	public void setCharacterAvatar(String characterAvatar) {
+		this.characterAvatar = characterAvatar;
 	}
 	public String getCharacterName() {
 		return characterName;
