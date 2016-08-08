@@ -37,7 +37,7 @@ public class AssembleServiceImpl implements AssembleService {
 		Map<String, Object> result = new HashMap<String, Object>();
 		try{
 			speech.setContent(speech.getType() == NVTermConstant.GESTURE_SIGN ? "*"+speech.getCharacterName()+" "+speech.getContent() : speech.getContent());
-			speech.setCreateTime(new SimpleDateFormat("yyyy-MM-dd HH:mm:ss").format(new Date()));
+			speech.setCreateTime(new SimpleDateFormat("yyyy/MM/dd HH:mm:ss").format(new Date()));
 			assembleMapper.saveSpeech(speech);
 			result.put(PageParamType.BUSINESS_STATUS, 1);
 			result.put(PageParamType.BUSINESS_MESSAGE, "保存发言成功！");
