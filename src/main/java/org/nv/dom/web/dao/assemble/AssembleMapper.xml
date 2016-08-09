@@ -24,5 +24,19 @@
 		)
 	
 	</insert>
+	
+	<delete id="deleteSpeech" parameterType="DeleteSpeechDTO">
+	
+		DELETE FROM
+			d_speech
+		WHERE
+			id=#{speechId};
+			
+		DELETE FROM
+			d_offline_speech
+		WHERE
+			id=#{speechId}
+	
+	</delete>
 
 </mapper>

@@ -5,6 +5,7 @@ import java.util.Map;
 import javax.servlet.http.HttpSession;
 
 import org.nv.dom.domain.speech.Speech;
+import org.nv.dom.dto.assemble.DeleteSpeechDTO;
 import org.nv.dom.web.service.AssembleService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -25,6 +26,10 @@ public class AssembleController {
 		return assembleService.saveSpeech(speech);
 	}
 	
+	@ResponseBody
+	@RequestMapping(value = "/deleteSpeech", method = RequestMethod.POST)
+	public Map<String, Object> deleteSpeech(@ModelAttribute("deleteSpeechDTO") DeleteSpeechDTO deleteSpeechDTO, HttpSession session) {
+		return assembleService.deleteSpeech(deleteSpeechDTO);
+	}
 	
-
 }

@@ -10,6 +10,7 @@ import org.apache.log4j.Logger;
 import org.nv.dom.config.NVTermConstant;
 import org.nv.dom.config.PageParamType;
 import org.nv.dom.domain.speech.Speech;
+import org.nv.dom.dto.assemble.DeleteSpeechDTO;
 import org.nv.dom.util.ThreadUtils;
 import org.nv.dom.util.json.JacksonJSONUtils;
 import org.nv.dom.web.dao.assemble.AssembleMapper;
@@ -18,8 +19,6 @@ import org.nv.dom.web.service.AssembleService;
 import org.nv.dom.websocket.util.SessionUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-
-
 
 @Service("assembleServiceImpl")
 public class AssembleServiceImpl implements AssembleService {
@@ -60,6 +59,32 @@ public class AssembleServiceImpl implements AssembleService {
 			});		
 		}catch(Exception e){
 			logger.error(e.getMessage(), e);
+			result.put(PageParamType.BUSINESS_STATUS, -1);
+			result.put(PageParamType.BUSINESS_MESSAGE, "系统异常");
+		}
+		return result;
+	}
+
+	@Override
+	public Map<String, Object> deleteSpeech(final DeleteSpeechDTO deleteSpeechDTO) {
+		Map<String, Object> result = new HashMap<String, Object>();
+		try{
+			assembleMapper.deleteSpeech(deleteSpeechDTO);
+			result.put(PageParamType.BUSINESS_STATUS, 1);
+			result.put(PageParamType.BUSINESS_MESSAGE, "删除发言成功！");
+			ThreadUtils.fixedPool.execute(new Runnable() {
+				@Override
+				public void run() {
+					try {
+						List<Long> users = userMapper.getUserIdListByGameId(deleteSpeechDTO.getGameId());
+						deleteSpeechDTO.setMessage("delete");
+						SessionUtils.pushMessageBatch(users, JacksonJSONUtils.beanToJSON(deleteSpeechDTO));
+					} catch (Exception e) {
+						logger.error(e.getMessage(), e);
+					}
+				}
+			});		
+		}catch(Exception e){
 			result.put(PageParamType.BUSINESS_STATUS, -1);
 			result.put(PageParamType.BUSINESS_MESSAGE, "系统异常");
 		}
