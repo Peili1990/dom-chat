@@ -7,6 +7,7 @@ public class Speech {
 	private long gameId;
 	private long newspaperId;
 	private long playerId;
+	private Integer isMute;
 	private String characterAvatar;
 	private String characterName;
 	private String avatar;
@@ -44,6 +45,12 @@ public class Speech {
 	}
 	public void setPlayerId(long playerId) {
 		this.playerId = playerId;
+	}
+	public Integer getIsMute() {
+		return isMute;
+	}
+	public void setIsMute(Integer isMute) {
+		this.isMute = isMute;
 	}
 	public String getCharacterAvatar() {
 		return characterAvatar;

@@ -2,7 +2,6 @@ package org.nv.dom.websocket;
 
 import java.io.IOException;
 
-import javax.websocket.CloseReason;
 import javax.websocket.OnClose;
 import javax.websocket.OnMessage;
 import javax.websocket.OnOpen;
@@ -28,14 +27,14 @@ public class WebSocketChat {
     }
 	
 	@OnOpen
-    public void onOpen (@PathParam("userId") long userId, Session session) {
+    public void onOpen (@PathParam("userId") long userId, Session session) throws IOException {
 		logger.info("Websocket Start Connection:" + userId);
         SessionUtils.put(userId, session);
     }
 
     @OnClose
-    public void onClose (@PathParam("userId") long userId, CloseReason closeReason, Session session) {
+    public void onClose (@PathParam("userId") long userId,Session session) {
     	logger.info("Websocket Close Connection:" + userId);
-    	SessionUtils.remove(userId);
+    	SessionUtils.remove(userId, session);
     }
 }

@@ -11,6 +11,7 @@ import org.nv.dom.config.NVTermConstant;
 import org.nv.dom.config.PageParamType;
 import org.nv.dom.domain.speech.Speech;
 import org.nv.dom.dto.assemble.DeleteSpeechDTO;
+import org.nv.dom.util.TextUtil;
 import org.nv.dom.util.ThreadUtils;
 import org.nv.dom.util.json.JacksonJSONUtils;
 import org.nv.dom.web.dao.assemble.AssembleMapper;
@@ -35,7 +36,12 @@ public class AssembleServiceImpl implements AssembleService {
 	public Map<String, Object> saveSpeech(final Speech speech) {
 		Map<String, Object> result = new HashMap<String, Object>();
 		try{
-			speech.setContent(speech.getType() == NVTermConstant.GESTURE_SIGN ? "*"+speech.getCharacterName()+" "+speech.getContent() : speech.getContent());
+			if(speech.getType() == NVTermConstant.GESTURE_SIGN){
+				speech.setContent("*"+speech.getCharacterName()+" "+speech.getContent());
+			}
+			if(speech.getIsMute() == NVTermConstant.STAMMER){
+				speech.setContent(TextUtil.Stammer(speech.getContent()));
+			}
 			speech.setCreateTime(new SimpleDateFormat("yyyy/MM/dd HH:mm:ss").format(new Date()));
 			assembleMapper.saveSpeech(speech);
 			result.put(PageParamType.BUSINESS_STATUS, 1);

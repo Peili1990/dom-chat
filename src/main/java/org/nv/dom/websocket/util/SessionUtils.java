@@ -5,9 +5,11 @@ import javax.websocket.Session;
 import org.apache.log4j.Logger;
 
 import java.io.IOException;
+import java.util.HashSet;
 import java.util.Iterator;
 import java.util.List;
 import java.util.Map;
+import java.util.Set;
 import java.util.concurrent.ConcurrentHashMap;
 
 /**
@@ -19,18 +21,30 @@ public class SessionUtils {
 
 	private static Logger logger = Logger.getLogger(SessionUtils.class);
 	
-	public static Map<Long, Session> clients = new ConcurrentHashMap<>();
+	public static Map<Long, Set<Session>> clients = new ConcurrentHashMap<>();
 
 	public static void put(long userId, Session session) {
-		clients.put(userId, session);
+		Set<Session> sessions = clients.get(userId);
+		if(sessions == null){
+			sessions = new HashSet<>();
+		}
+		sessions.add(session);
+		clients.put(userId, sessions);
 	}
 
-	public static Session get(long userId) {
+	public static Set<Session> get(long userId) {
 		return clients.get(userId);
 	}
 
-	public static void remove(long userId) {
-		clients.remove(userId);
+	public static void remove(long userId, Session session) {
+		Set<Session> sessions = clients.get(userId);
+		if(sessions == null){
+			return;
+		}
+		sessions.remove(session);
+		if(sessions.isEmpty()){
+			clients.remove(userId);
+		}
 	}
 
 	/**
@@ -55,7 +69,9 @@ public class SessionUtils {
 			while (iter.hasNext()) {
 				Long userId = iter.next();
 				if (hasConnection(userId)) {
-					get(userId).getBasicRemote().sendText(content);
+					for(Session session : get(userId)){
+						session.getBasicRemote().sendText(content);		
+					}
 					iter.remove();
 				}
 			}
