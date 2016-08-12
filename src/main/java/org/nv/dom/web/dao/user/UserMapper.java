@@ -3,6 +3,7 @@ package org.nv.dom.web.dao.user;
 import java.util.List;
 import java.util.Map;
 
+import org.nv.dom.domain.chat.ChatInfo;
 import org.springframework.stereotype.Repository;
 
 @Repository
@@ -12,6 +13,6 @@ public interface UserMapper {
 	
 	public int saveOfflineSpeech(Map<String, Object> map);
 	
-	public long getUserIdByPlayerId(long playerId);
+	public ChatInfo getChatInfoByPlayerId(long playerId);
 
 }

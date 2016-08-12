@@ -23,12 +23,14 @@ public class UserServiceImpl implements UserService {
 	public Map<String, Object> getConnectionInfo(ChatInfo chatInfo) {
 		Map<String, Object> result = new HashMap<>();
 		try{
-			long toUserId = userMapper.getUserIdByPlayerId(chatInfo.getToPlayerId());
-			String chatId = chatInfo.getFromUserId() > toUserId ? 
-					String.valueOf(toUserId)+"-"+String.valueOf(chatInfo.getFromUserId()) : 
-						String.valueOf(chatInfo.getFromUserId())+"-"+String.valueOf(toUserId);
-			chatInfo.setToUserId(toUserId);
+			chatInfo = userMapper.getChatInfoByPlayerId(chatInfo.getToPlayerId());
+			long fromUserId = chatInfo.getFromUserId();
+			long toUserId = chatInfo.getToUserId();
+			String chatId = fromUserId > toUserId ? 
+					String.valueOf(toUserId)+"-"+String.valueOf(fromUserId) : 
+						String.valueOf(fromUserId)+"-"+String.valueOf(toUserId);
 			chatInfo.setChatId(chatId);
+			result.put("chatInfo", chatInfo);
 			result.put(PageParamType.BUSINESS_STATUS, 1);
 			result.put(PageParamType.BUSINESS_MESSAGE, "获取连接信息成功");
 		}catch(Exception e){

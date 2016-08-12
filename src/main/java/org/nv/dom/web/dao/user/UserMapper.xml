@@ -31,14 +31,17 @@
 	
 	</insert>
 	
-	<select id="getUserIdByPlayerId" parameterType="long"  resultType="long">
+	<select id="getChatInfoByPlayerId" parameterType="long"  resultType="ChatInfo">
 	
 		SELECT
-			dp.user_id
+			dp.user_id AS toUserId,
+			du.nickname AS toUserNickname,
+			du.avatar AS toUserAvatar,
+			du.motto AS toUserMotto
 		FROM
-			d_player dp
+			d_player dp, d_user du
 		WHERE
-			dp.id=#{playerId}
+			dp.id=#{playerId} AND du.id = dp.user_id
 	
 	</select>
 
