@@ -57,6 +57,24 @@ public class SessionUtils {
 	public static boolean hasConnection(long userId) {
 		return clients.containsKey(userId);
 	}
+	/**
+	 * 推送消息
+	 * 
+	 */
+	public static boolean pushMessage(long userId, String content) {
+		try {
+			if (hasConnection(userId)) {
+				for(Session session : get(userId)){
+					session.getBasicRemote().sendText(content);		
+				}
+				return true;
+			}
+			return false;
+		} catch (IOException e) {
+			logger.error(e.getMessage(), e);
+			return false;
+		}
+	}
 	
 	/**
 	 * 批量推送消息

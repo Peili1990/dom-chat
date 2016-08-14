@@ -53,11 +53,13 @@ public class AssembleServiceImpl implements AssembleService {
 						List<Long> users = userMapper.getUserIdListByGameId(speech.getGameId());
 						speech.setMessage("speech");
 						users = SessionUtils.pushMessageBatch(users, JacksonJSONUtils.beanToJSON(speech));
-						Map<String, Object> map = new HashMap<String, Object>();
-						map.put("speechId", speech.getId());
-						map.put("users", users);
-						map.put("newspaperId", speech.getNewspaperId());
-						userMapper.saveOfflineSpeech(map);
+						if(!users.isEmpty()){
+							Map<String, Object> map = new HashMap<String, Object>();
+							map.put("speechId", speech.getId());
+							map.put("users", users);
+							map.put("newspaperId", speech.getNewspaperId());
+							userMapper.saveOfflineSpeech(map);
+						}
 					} catch (Exception e) {
 						logger.error(e.getMessage(), e);
 					}

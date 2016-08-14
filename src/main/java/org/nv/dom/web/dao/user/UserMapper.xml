@@ -44,5 +44,37 @@
 			dp.id=#{playerId} AND du.id = dp.user_id
 	
 	</select>
+	
+	<select id="getChatInfoByUserId" parameterType="long"  resultType="ChatInfo">
+	
+		SELECT
+			du.id AS toUserId,
+			du.nickname AS toUserNickname,
+			du.avatar AS toUserAvatar,
+			du.motto AS toUserMotto
+		FROM
+			d_user du
+		WHERE
+			dp.id=#{toUserId}
+	
+	</select>
+	
+	<insert id="saveOfflineMessage" parameterType="ChatDetail">
+	
+		INSERT INTO d_offline_message(
+			user_id,
+			chat_id,
+			content,
+			create_time
+		)
+		VALUES(
+			#{toUserId},
+			#{chatId},
+			#{content},
+			#{createTime}
+		)
+			
+	
+	</insert>
 
 </mapper>
