@@ -62,18 +62,19 @@
 	<insert id="saveOfflineMessage" parameterType="ChatDetail">
 	
 		INSERT INTO d_offline_message(
-			user_id,
+			from_user_id,
+			to_user_id,
 			chat_id,
 			content,
 			create_time
 		)
 		VALUES(
+			#{fromUserId},
 			#{toUserId},
 			#{chatId},
 			#{content},
 			#{createTime}
-		)
-			
+		)			
 	
 	</insert>
 

@@ -4,6 +4,7 @@ public class ChatDetail {
 	
 	private String message;
 	private String chatId;
+	private long fromUserId;
 	private long toUserId;
 	private String content;
 	private String createTime;
@@ -18,6 +19,12 @@ public class ChatDetail {
 	}
 	public void setChatId(String chatId) {
 		this.chatId = chatId;
+	}
+	public long getFromUserId() {
+		return fromUserId;
+	}
+	public void setFromUserId(long fromUserId) {
+		this.fromUserId = fromUserId;
 	}
 	public long getToUserId() {
 		return toUserId;

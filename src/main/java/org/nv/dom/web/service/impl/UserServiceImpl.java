@@ -55,6 +55,7 @@ public class UserServiceImpl implements UserService {
 		Map<String, Object> result = new HashMap<String, Object>();
 		chatDetail.setCreateTime(new SimpleDateFormat("yyyy/MM/dd HH:mm:ss").format(new Date()));
 		try{
+			chatDetail.setMessage("chat");
 			if(!SessionUtils.pushMessage(chatDetail.getToUserId(),JacksonJSONUtils.beanToJSON(chatDetail))){
 				userMapper.saveOfflineMessage(chatDetail);
 			}
