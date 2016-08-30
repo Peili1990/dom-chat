@@ -12,6 +12,8 @@ public interface UserMapper {
 	
 	public List<Long> getUserIdListByGameId(long gameId);
 	
+	public List<Long> getJudgerIdListByGameId(long gameId);
+	
 	public int saveOfflineSpeech(Map<String, Object> map);
 	
 	public ChatInfo getChatInfoByPlayerId(long playerId);

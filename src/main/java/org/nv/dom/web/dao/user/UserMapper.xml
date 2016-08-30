@@ -13,6 +13,18 @@
 	
 	</select>
 	
+	<select id="getJudgerIdListByGameId" parameterType="long" resultType="long">
+	
+		SELECT 
+			dp.user_id
+		FROM
+			d_player dp
+		WHERE
+			dp.game_id = #{gameId} AND dp.status != 9 AND dp.role= 'judger'
+	
+	
+	</select>
+	
 	<insert id="saveOfflineSpeech">
 	
 		INSERT INTO d_offline_speech(
@@ -77,5 +89,5 @@
 		)			
 	
 	</insert>
-
+	
 </mapper>

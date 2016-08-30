@@ -6,6 +6,7 @@ import javax.servlet.http.HttpSession;
 
 import org.nv.dom.domain.chat.ChatDetail;
 import org.nv.dom.domain.chat.ChatInfo;
+import org.nv.dom.domain.settlement.Settlement;
 import org.nv.dom.web.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -30,5 +31,11 @@ public class UserController {
 	@RequestMapping(value = "/sendMessage", method = RequestMethod.POST)
 	public Map<String, Object> sendMessage(@ModelAttribute("chatDetail") ChatDetail chatDetail, HttpSession session) {
 		return userService.sendMessage(chatDetail);
+	}
+	
+	@ResponseBody
+	@RequestMapping(value = "/onlineSettlement", method = RequestMethod.POST)
+	public Map<String, Object> onlineSettlement(@ModelAttribute("settlement") Settlement settlement, HttpSession session){
+		return userService.sendOnlineSettlement(settlement);
 	}
 }

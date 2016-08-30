@@ -3,12 +3,14 @@ package org.nv.dom.web.service.impl;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 import org.apache.log4j.Logger;
 import org.nv.dom.config.PageParamType;
 import org.nv.dom.domain.chat.ChatDetail;
 import org.nv.dom.domain.chat.ChatInfo;
+import org.nv.dom.domain.settlement.Settlement;
 import org.nv.dom.util.json.JacksonJSONUtils;
 import org.nv.dom.web.dao.user.UserMapper;
 import org.nv.dom.web.service.UserService;
@@ -62,6 +64,29 @@ public class UserServiceImpl implements UserService {
 			result.put("chatDetail", chatDetail);
 			result.put(PageParamType.BUSINESS_STATUS, 1);
 			result.put(PageParamType.BUSINESS_MESSAGE, "消息发送成功");
+		}catch(Exception e){
+			logger.error(e.getMessage(), e);
+			result.put(PageParamType.BUSINESS_STATUS, -1);
+			result.put(PageParamType.BUSINESS_MESSAGE, "系统异常");
+		}
+		return result;
+	}
+
+	@Override
+	public Map<String, Object> sendOnlineSettlement(Settlement settlement) {
+		Map<String, Object> result = new HashMap<String, Object>();
+		try{
+			settlement.setMessage("settlement");
+			List<Long> judgers = userMapper.getJudgerIdListByGameId(settlement.getGameId());
+			int oldsize = judgers.size();
+			judgers = SessionUtils.pushMessageBatch(judgers, JacksonJSONUtils.beanToJSON(settlement));
+			if(oldsize-1==judgers.size()){			
+				result.put(PageParamType.BUSINESS_STATUS, -3);
+				result.put(PageParamType.BUSINESS_MESSAGE, "无其它法官在线");
+			} else {
+				result.put(PageParamType.BUSINESS_STATUS, 1);
+				result.put(PageParamType.BUSINESS_MESSAGE, "联机结算成功");
+			}
 		}catch(Exception e){
 			logger.error(e.getMessage(), e);
 			result.put(PageParamType.BUSINESS_STATUS, -1);
