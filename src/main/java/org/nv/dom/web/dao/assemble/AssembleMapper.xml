@@ -16,7 +16,7 @@
 		VALUES(
 			#{playerId},
 			#{characterName},
-			#{characterAvatar},
+			#{avatar},
 			#{newspaperId},
 			#{content},
 			#{createTime},
