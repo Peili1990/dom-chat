@@ -1,6 +1,7 @@
 package org.nv.dom.web.service.impl;
 
 import java.text.SimpleDateFormat;
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
@@ -11,6 +12,7 @@ import org.nv.dom.config.PageParamType;
 import org.nv.dom.domain.chat.ChatDetail;
 import org.nv.dom.domain.chat.ChatInfo;
 import org.nv.dom.domain.settlement.Settlement;
+import org.nv.dom.domain.speech.OfflineMessage;
 import org.nv.dom.util.json.JacksonJSONUtils;
 import org.nv.dom.web.dao.user.UserMapper;
 import org.nv.dom.web.service.UserService;
@@ -87,6 +89,32 @@ public class UserServiceImpl implements UserService {
 				result.put(PageParamType.BUSINESS_STATUS, 1);
 				result.put(PageParamType.BUSINESS_MESSAGE, "联机结算成功");
 			}
+		}catch(Exception e){
+			logger.error(e.getMessage(), e);
+			result.put(PageParamType.BUSINESS_STATUS, -1);
+			result.put(PageParamType.BUSINESS_MESSAGE, "系统异常");
+		}
+		return result;
+	}
+
+	@Override
+	public Map<String, Object> saveOfflineSpeech(OfflineMessage offlineMessage) {
+		Map<String, Object> result = new HashMap<String, Object>();
+		try{
+			if(SessionUtils.get(offlineMessage.getUserId()).size()==1){
+				Map<String, Object> map = new HashMap<String, Object>();
+				List<Long> users = new ArrayList<>();
+				users.add(offlineMessage.getUserId());
+				map.put("speechId", offlineMessage.getSpeechId());
+				map.put("users", users);
+				map.put("newspaperId", offlineMessage.getNewspaperId());
+				userMapper.saveOfflineSpeech(map);
+				result.put(PageParamType.BUSINESS_STATUS, 1);
+				result.put(PageParamType.BUSINESS_MESSAGE, "保存离线发言成功");
+			}else{
+				result.put(PageParamType.BUSINESS_STATUS, -3);
+				result.put(PageParamType.BUSINESS_MESSAGE, "离线发言未保存");
+			}	
 		}catch(Exception e){
 			logger.error(e.getMessage(), e);
 			result.put(PageParamType.BUSINESS_STATUS, -1);
