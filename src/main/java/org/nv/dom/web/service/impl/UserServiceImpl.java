@@ -77,6 +77,11 @@ public class UserServiceImpl implements UserService {
 	@Override
 	public Map<String, Object> sendOnlineSettlement(Settlement settlement) {
 		Map<String, Object> result = new HashMap<String, Object>();
+		if(settlement.getGameId() < 1L){
+			result.put(PageParamType.BUSINESS_STATUS, -4);
+			result.put(PageParamType.BUSINESS_MESSAGE, "不是进行中的版杀");
+			return result;
+		}
 		try{
 			settlement.setMessage("settlement");
 			List<Long> judgers = userMapper.getJudgerIdListByGameId(settlement.getGameId());
