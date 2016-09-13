@@ -7,6 +7,8 @@ import org.springframework.stereotype.Repository;
 @Repository
 public interface AssembleMapper {
 	
+	public Integer getNewspaperStatus(long newspaperId);
+	
 	public int saveSpeech(Speech speech);
 	
 	public int deleteSpeech(DeleteSpeechDTO deleteSpeechDTO);

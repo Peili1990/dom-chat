@@ -36,6 +36,11 @@ public class AssembleServiceImpl implements AssembleService {
 	public Map<String, Object> saveSpeech(final Speech speech) {
 		Map<String, Object> result = new HashMap<String, Object>();
 		try{
+			if(assembleMapper.getNewspaperStatus(speech.getNewspaperId())!=1){
+				result.put(PageParamType.BUSINESS_STATUS, -3);
+				result.put(PageParamType.BUSINESS_MESSAGE, "当前集会不允许发言");
+				return result;
+			}
 			if(speech.getType() == NVTermConstant.GESTURE_SIGN){
 				speech.setContent("*"+speech.getCharacterName()+" "+speech.getContent());
 			}
