@@ -20,6 +20,6 @@ public interface UserMapper {
 	
 	public ChatInfo getChatInfoByUserId(long userId);
 	
-	public int saveOfflineMessage(ChatDetail chatDetail);
+	public int saveMessage(ChatDetail chatDetail);
 
 }

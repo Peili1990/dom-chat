@@ -71,21 +71,23 @@
 	
 	</select>
 	
-	<insert id="saveOfflineMessage" parameterType="ChatDetail">
+	<insert id="saveMessage" parameterType="ChatDetail">
 	
 		INSERT INTO d_offline_message(
 			from_user_id,
 			to_user_id,
 			chat_id,
 			content,
-			create_time
+			create_time,
+			is_read
 		)
 		VALUES(
 			#{fromUserId},
 			#{toUserId},
 			#{chatId},
 			#{content},
-			#{createTime}
+			#{createTime},
+			#{isRead}
 		)			
 	
 	</insert>

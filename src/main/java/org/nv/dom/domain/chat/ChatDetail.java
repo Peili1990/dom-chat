@@ -8,6 +8,8 @@ public class ChatDetail {
 	private long toUserId;
 	private String content;
 	private String createTime;
+	private Integer isRead;
+	
 	public String getMessage() {
 		return message;
 	}
@@ -44,9 +46,11 @@ public class ChatDetail {
 	public void setCreateTime(String createTime) {
 		this.createTime = createTime;
 	}
+	public Integer getIsRead() {
+		return isRead;
+	}
+	public void setIsRead(Integer isRead) {
+		this.isRead = isRead;
+	}
 	
-	
-	
-	
-
 }

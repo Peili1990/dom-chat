@@ -61,8 +61,11 @@ public class UserServiceImpl implements UserService {
 		try{
 			chatDetail.setMessage("chat");
 			if(!SessionUtils.pushMessage(chatDetail.getToUserId(),JacksonJSONUtils.beanToJSON(chatDetail))){
-				userMapper.saveOfflineMessage(chatDetail);
+				chatDetail.setIsRead(0);
+			} else {
+				chatDetail.setIsRead(1);
 			}
+			userMapper.saveMessage(chatDetail);
 			result.put("chatDetail", chatDetail);
 			result.put(PageParamType.BUSINESS_STATUS, 1);
 			result.put(PageParamType.BUSINESS_MESSAGE, "消息发送成功");
