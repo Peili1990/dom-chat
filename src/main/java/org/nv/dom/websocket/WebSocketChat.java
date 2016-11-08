@@ -3,6 +3,7 @@ package org.nv.dom.websocket;
 import java.io.IOException;
 
 import javax.websocket.OnClose;
+import javax.websocket.OnError;
 import javax.websocket.OnMessage;
 import javax.websocket.OnOpen;
 import javax.websocket.Session;
@@ -36,5 +37,11 @@ public class WebSocketChat {
     public void onClose (@PathParam("userId") long userId,Session session) {
     	logger.info("Websocket Close Connection:" + userId);
     	SessionUtils.remove(userId, session);
+    }
+    
+    @OnError
+    public void onError(@PathParam("userId") long userId,Session session,Throwable error) {
+    	logger.info("An error occurred.");
+    	logger.error(error.getMessage(),error);
     }
 }
