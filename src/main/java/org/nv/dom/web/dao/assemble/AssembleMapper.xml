@@ -49,5 +49,18 @@
 			id=#{speechId}
 	
 	</delete>
+	
+	<update id="submitOpreationDao" parameterType="SubmitOpreationDTO">
+	
+		UPDATE d_player_record dpr
+		SET
+			dpr.action=#{action},
+			dpr.privilege=#{privilege},
+			dpr.vote=#{vote},
+			dpr.submit_time=NOW()
+		WHERE
+			dpr.player_id=#{playerId}
+	
+	</update>
 
 </mapper>

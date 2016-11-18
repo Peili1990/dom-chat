@@ -46,5 +46,4 @@ public class UserController {
 		return userService.sendOnlineSettlement(settlement);
 	}
 	
-	
 }

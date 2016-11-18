@@ -9,6 +9,7 @@ import java.util.Map;
 import org.apache.log4j.Logger;
 import org.nv.dom.config.NVTermConstant;
 import org.nv.dom.config.PageParamType;
+import org.nv.dom.domain.player.SubmitOpreationDTO;
 import org.nv.dom.domain.speech.Speech;
 import org.nv.dom.dto.assemble.DeleteSpeechDTO;
 import org.nv.dom.util.TextUtil;
@@ -43,8 +44,7 @@ public class AssembleServiceImpl implements AssembleService {
 			}
 			if(speech.getType() == NVTermConstant.GESTURE_SIGN){
 				speech.setContent("*"+speech.getCharacterName()+" "+speech.getContent());
-			}
-			if(speech.getIsMute() == NVTermConstant.STAMMER){
+			} else if(speech.getIsMute() == NVTermConstant.STAMMER){
 				speech.setContent(TextUtil.Stammer(speech.getContent()));
 			}
 			speech.setCreateTime(new SimpleDateFormat("yyyy/MM/dd HH:mm:ss").format(new Date()));
@@ -98,6 +98,37 @@ public class AssembleServiceImpl implements AssembleService {
 				}
 			});		
 		}catch(Exception e){
+			result.put(PageParamType.BUSINESS_STATUS, -1);
+			result.put(PageParamType.BUSINESS_MESSAGE, "系统异常");
+		}
+		return result;
+	}
+
+	@Override
+	public Map<String, Object> submitOpreation(final SubmitOpreationDTO submitOpreationDTO) {
+		final Map<String, Object> result = new HashMap<String, Object>();
+		try{
+			if(assembleMapper.submitOpreationDao(submitOpreationDTO)==1){
+				result.put(PageParamType.BUSINESS_STATUS, 1);
+				result.put(PageParamType.BUSINESS_MESSAGE, "提交操作成功！");
+				ThreadUtils.fixedPool.execute(new Runnable() {
+					@Override
+					public void run() {
+						try {
+							List<Long> judgers = userMapper.getJudgerIdListByGameId(submitOpreationDTO.getGameId());
+							result.put(PageParamType.BUSINESS_MESSAGE, "opreation");
+							SessionUtils.pushMessageBatch(judgers, JacksonJSONUtils.beanToJSON(result));
+						} catch (Exception e) {
+							logger.error(e.getMessage(), e);
+						}
+					}
+				});		
+			} else {
+				result.put(PageParamType.BUSINESS_STATUS, -3);
+				result.put(PageParamType.BUSINESS_MESSAGE, "提交操作失败！");
+			}
+		} catch(Exception e){
+			logger.error(e.getMessage(),e);
 			result.put(PageParamType.BUSINESS_STATUS, -1);
 			result.put(PageParamType.BUSINESS_MESSAGE, "系统异常");
 		}
