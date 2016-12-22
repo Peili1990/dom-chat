@@ -45,6 +45,11 @@ public class AssembleServiceImpl implements AssembleService {
 			if(speech.getType() == NVTermConstant.GESTURE_SIGN){
 				speech.setContent("*"+speech.getCharacterName()+" "+speech.getContent());
 			} else if(speech.getIsMute() == NVTermConstant.STAMMER){
+				if(TextUtil.wordCount(speech.getContent())<50){
+					result.put(PageParamType.BUSINESS_STATUS, -3);
+					result.put(PageParamType.BUSINESS_MESSAGE, "语无伦次需要大于50字");
+					return result;
+				}
 				speech.setContent(TextUtil.Stammer(speech.getContent()));
 			}
 			speech.setCreateTime(new SimpleDateFormat("yyyy/MM/dd HH:mm:ss").format(new Date()));

@@ -32,6 +32,18 @@ public class TextUtil {
         }
         return result;
 	}
+	
+	/**
+	 * <p>统计字数</p>
+	 * 
+	 */
+	
+	public static Integer wordCount(String content){
+		WordConfTools.set("dic.path", "classpath:nv_dict.txt");
+        DictionaryFactory.reload();
+        List<Word> words = WordSegmenter.segWithStopWords(content);
+        return words.size();
+	}
 
 
 }
