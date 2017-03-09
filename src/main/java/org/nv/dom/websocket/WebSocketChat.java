@@ -30,6 +30,7 @@ public class WebSocketChat {
 	@OnOpen
     public void onOpen (@PathParam("userId") long userId, Session session) throws IOException {
 		logger.info("Websocket Start Connection:" + userId);
+		session.setMaxIdleTimeout(0);
         SessionUtils.put(userId, session);
     }
 
