@@ -1,7 +1,5 @@
 package org.nv.dom.websocket;
 
-import java.io.IOException;
-
 import javax.websocket.OnClose;
 import javax.websocket.OnError;
 import javax.websocket.OnMessage;
@@ -19,8 +17,7 @@ public class WebSocketChat {
 	private static Logger logger = Logger.getLogger(WebSocketChat.class);
 
 	@OnMessage
-    public void onMessage(@PathParam("userId") long userId, String message, Session session) 
-    	throws IOException, InterruptedException {
+    public void onMessage(@PathParam("userId") long userId, String message, Session session) {
 		
 		// Print the client message for testing purposes
 		logger.info("Received: " + message);
@@ -28,7 +25,7 @@ public class WebSocketChat {
     }
 	
 	@OnOpen
-    public void onOpen (@PathParam("userId") long userId, Session session) throws IOException {
+    public void onOpen (@PathParam("userId") long userId, Session session) {
 		logger.info("Websocket Start Connection:" + userId);
 		session.setMaxIdleTimeout(0);
         SessionUtils.put(userId, session);
@@ -36,13 +33,12 @@ public class WebSocketChat {
 
     @OnClose
     public void onClose (@PathParam("userId") long userId,Session session) {
-    	logger.info("Websocket Close Connection:" + userId);
+    	logger.info("Websocket Close Connection:" + userId);   	
     	SessionUtils.remove(userId, session);
     }
     
     @OnError
     public void onError(@PathParam("userId") long userId,Session session,Throwable error) {
-    	logger.info("An error occurred.");
-    	logger.error(error.getMessage(),error);
+    	SessionUtils.remove(userId, session);
     }
 }
