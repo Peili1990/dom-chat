@@ -1,5 +1,6 @@
 package org.nv.dom.web.controller;
 
+import java.util.List;
 import java.util.Map;
 
 import javax.servlet.http.HttpSession;
@@ -12,6 +13,7 @@ import org.nv.dom.web.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.ModelAttribute;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
@@ -32,6 +34,12 @@ public class UserController {
 	@RequestMapping(value = "/sendMessage", method = RequestMethod.POST)
 	public Map<String, Object> sendMessage(@ModelAttribute("chatDetail") ChatDetail chatDetail, HttpSession session) {
 		return userService.sendMessage(chatDetail);
+	}
+	
+	@ResponseBody
+	@RequestMapping(value = "/sendMessageBatch", method = RequestMethod.POST)
+	public Map<String, Object> sendMessageBatch(@RequestBody List<ChatDetail> chatDetails, HttpSession session) {
+		return userService.sendMessageBatch(chatDetails);
 	}
 	
 	@ResponseBody

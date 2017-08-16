@@ -130,6 +130,30 @@ public class UserServiceImpl implements UserService {
 		}
 		return result;
 	}
+
+	@Override
+	public Map<String, Object> sendMessageBatch(List<ChatDetail> chatDetails) {
+		Map<String, Object> result = new HashMap<String, Object>();	
+		try{
+			for(ChatDetail chatDetail : chatDetails){
+				chatDetail.setCreateTime(new SimpleDateFormat("yyyy/MM/dd HH:mm:ss").format(new Date()));
+				chatDetail.setMessage("chat");
+				if(!SessionUtils.pushMessage(chatDetail.getToUserId(),JacksonJSONUtils.beanToJSON(chatDetail))){
+					chatDetail.setIsRead(0);
+				} else {
+					chatDetail.setIsRead(1);
+				}			
+			}
+			userMapper.saveMessageBatch(chatDetails);	
+			result.put(PageParamType.BUSINESS_STATUS, 1);
+			result.put(PageParamType.BUSINESS_MESSAGE, "消息发送成功");
+		}catch(Exception e){
+			logger.error(e.getMessage(), e);
+			result.put(PageParamType.BUSINESS_STATUS, -1);
+			result.put(PageParamType.BUSINESS_MESSAGE, "系统异常");
+		}
+		return result;
+	}
 	
 	
 

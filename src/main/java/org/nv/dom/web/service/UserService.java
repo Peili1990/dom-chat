@@ -1,5 +1,6 @@
 package org.nv.dom.web.service;
 
+import java.util.List;
 import java.util.Map;
 
 import org.nv.dom.domain.chat.ChatDetail;
@@ -12,6 +13,8 @@ public interface UserService {
 	public Map<String, Object> getConnectionInfo(ChatInfo chatInfo);
 	
 	public Map<String, Object> sendMessage(ChatDetail chatDetail);
+	
+	public Map<String, Object> sendMessageBatch(List<ChatDetail> chatDetails);
 
 	public Map<String, Object> sendOnlineSettlement(Settlement settlement);
 

@@ -21,5 +21,7 @@ public interface UserMapper {
 	public ChatInfo getChatInfoByUserId(long userId);
 	
 	public int saveMessage(ChatDetail chatDetail);
+	
+	public int saveMessageBatch(List<ChatDetail> chatDetails);
 
 }

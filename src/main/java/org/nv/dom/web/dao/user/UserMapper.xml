@@ -92,4 +92,28 @@
 	
 	</insert>
 	
+	<insert id="saveMessageBatch">
+	
+		INSERT INTO d_offline_message(
+			from_user_id,
+			to_user_id,
+			chat_id,
+			content,
+			create_time,
+			is_read
+		)
+		VALUES
+			 <foreach item="item" index="index" collection="list" separator=",">
+ 			(
+            #{item.fromUserId},
+			#{item.toUserId},
+			#{item.chatId},
+			#{item.content},
+			#{item.createTime},
+			#{item.isRead}
+            )
+    		 </foreach>
+	
+	</insert>
+	
 </mapper>
