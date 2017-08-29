@@ -7,6 +7,7 @@ import javax.servlet.http.HttpSession;
 
 import org.nv.dom.domain.chat.ChatDetail;
 import org.nv.dom.domain.chat.ChatInfo;
+import org.nv.dom.domain.chat.OfflineChat;
 import org.nv.dom.domain.settlement.Settlement;
 import org.nv.dom.domain.speech.OfflineMessage;
 import org.nv.dom.web.service.UserService;
@@ -46,6 +47,12 @@ public class UserController {
 	@RequestMapping(value = "/saveOfflineSpeech", method = RequestMethod.POST)
 	public Map<String, Object> saveOfflineSpeech(@ModelAttribute("offlineMessage") OfflineMessage offlineMessage , HttpSession session) {
 		return userService.saveOfflineSpeech(offlineMessage);
+	}
+	
+	@ResponseBody
+	@RequestMapping(value = "/saveOfflineChat", method = RequestMethod.POST)
+	public Map<String, Object> saveOfflineChat(@ModelAttribute("offlineChat") OfflineChat offlineChat , HttpSession session) {
+		return userService.saveOfflineChat(offlineChat);
 	}
 	
 	@ResponseBody

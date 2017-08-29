@@ -11,6 +11,7 @@ import org.apache.log4j.Logger;
 import org.nv.dom.config.PageParamType;
 import org.nv.dom.domain.chat.ChatDetail;
 import org.nv.dom.domain.chat.ChatInfo;
+import org.nv.dom.domain.chat.OfflineChat;
 import org.nv.dom.domain.settlement.Settlement;
 import org.nv.dom.domain.speech.OfflineMessage;
 import org.nv.dom.util.json.JacksonJSONUtils;
@@ -147,6 +148,26 @@ public class UserServiceImpl implements UserService {
 			userMapper.saveMessageBatch(chatDetails);	
 			result.put(PageParamType.BUSINESS_STATUS, 1);
 			result.put(PageParamType.BUSINESS_MESSAGE, "消息发送成功");
+		}catch(Exception e){
+			logger.error(e.getMessage(), e);
+			result.put(PageParamType.BUSINESS_STATUS, -1);
+			result.put(PageParamType.BUSINESS_MESSAGE, "系统异常");
+		}
+		return result;
+	}
+
+	@Override
+	public Map<String, Object> saveOfflineChat(OfflineChat offlineChat) {
+		Map<String, Object> result = new HashMap<String, Object>();
+		try{
+			if(SessionUtils.get(offlineChat.getUserId()).size()==1){
+				userMapper.updateOfflineChat(offlineChat.getChatId(), offlineChat.getCreateTime());
+				result.put(PageParamType.BUSINESS_STATUS, 1);
+				result.put(PageParamType.BUSINESS_MESSAGE, "保存离线消息成功");
+			}else{
+				result.put(PageParamType.BUSINESS_STATUS, -3);
+				result.put(PageParamType.BUSINESS_MESSAGE, "离线消息未保存");
+			}	
 		}catch(Exception e){
 			logger.error(e.getMessage(), e);
 			result.put(PageParamType.BUSINESS_STATUS, -1);

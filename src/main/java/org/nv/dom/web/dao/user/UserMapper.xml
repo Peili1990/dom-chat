@@ -43,6 +43,17 @@
 	
 	</insert>
 	
+	<update id="updateOfflineChat">
+	
+		UPDATE
+			d_offline_message
+		SET
+			is_read = 0 
+		WHERE
+			chat_id = #{chatId} AND create_time = #{createTime}
+	
+	</update>
+	
 	<select id="getChatInfoByPlayerId" parameterType="long"  resultType="ChatInfo">
 	
 		SELECT
