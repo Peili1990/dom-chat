@@ -9,7 +9,6 @@ import java.util.Map;
 import org.apache.log4j.Logger;
 import org.nv.dom.config.NVTermConstant;
 import org.nv.dom.config.PageParamType;
-import org.nv.dom.domain.player.SubmitOpreationDTO;
 import org.nv.dom.domain.speech.Speech;
 import org.nv.dom.dto.assemble.DeleteSpeechDTO;
 import org.nv.dom.util.TextUtil;
@@ -110,28 +109,21 @@ public class AssembleServiceImpl implements AssembleService {
 	}
 
 	@Override
-	public Map<String, Object> submitOpreation(final SubmitOpreationDTO submitOpreationDTO) {
+	public Map<String, Object> submitOpreation(final long gameId) {
 		final Map<String, Object> result = new HashMap<String, Object>();
 		try{
-			if(assembleMapper.submitOpreationDao(submitOpreationDTO)==1){
-				result.put(PageParamType.BUSINESS_STATUS, 1);
-				result.put(PageParamType.BUSINESS_MESSAGE, "提交操作成功！");
-				ThreadUtils.fixedPool.execute(new Runnable() {
-					@Override
-					public void run() {
-						try {
-							List<Long> judgers = userMapper.getJudgerIdListByGameId(submitOpreationDTO.getGameId());
-							result.put(PageParamType.BUSINESS_MESSAGE, "opreation");
-							SessionUtils.pushMessageBatch(judgers, JacksonJSONUtils.beanToJSON(result));
-						} catch (Exception e) {
-							logger.error(e.getMessage(), e);
-						}
+			ThreadUtils.fixedPool.execute(new Runnable() {
+				@Override
+				public void run() {
+					try {
+						List<Long> judgers = userMapper.getJudgerIdListByGameId(gameId);
+						result.put(PageParamType.BUSINESS_MESSAGE, "opreation");
+						SessionUtils.pushMessageBatch(judgers, JacksonJSONUtils.beanToJSON(result));
+					} catch (Exception e) {
+						logger.error(e.getMessage(), e);
 					}
-				});		
-			} else {
-				result.put(PageParamType.BUSINESS_STATUS, -3);
-				result.put(PageParamType.BUSINESS_MESSAGE, "提交操作失败！");
-			}
+				}
+			});		
 		} catch(Exception e){
 			logger.error(e.getMessage(),e);
 			result.put(PageParamType.BUSINESS_STATUS, -1);
