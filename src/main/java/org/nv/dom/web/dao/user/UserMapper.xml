@@ -90,7 +90,8 @@
 			chat_id,
 			content,
 			create_time,
-			is_read
+			is_read,
+			pay_load
 		)
 		VALUES(
 			#{fromUserId},
@@ -98,7 +99,8 @@
 			#{chatId},
 			#{content},
 			#{createTime},
-			#{isRead}
+			#{isRead},
+			#{payLoad}
 		)			
 	
 	</insert>
@@ -111,7 +113,8 @@
 			chat_id,
 			content,
 			create_time,
-			is_read
+			is_read,
+			pay_load
 		)
 		VALUES
 			 <foreach item="item" index="index" collection="list" separator=",">
@@ -121,7 +124,8 @@
 			#{item.chatId},
 			#{item.content},
 			#{item.createTime},
-			#{item.isRead}
+			#{item.isRead},
+			#{item.payLoad}
             )
     		 </foreach>
 	

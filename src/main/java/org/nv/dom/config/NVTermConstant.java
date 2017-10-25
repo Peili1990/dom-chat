@@ -7,5 +7,7 @@ public class NVTermConstant {
 	public static final Integer GESTURE_SIGN = 2;
 	
 	public static final Integer STAMMER = 2;
+	
+	public static final Integer ADMINISTRATOR = 2;
 
 }

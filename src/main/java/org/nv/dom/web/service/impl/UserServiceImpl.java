@@ -8,18 +8,24 @@ import java.util.List;
 import java.util.Map;
 
 import org.apache.log4j.Logger;
+import org.nv.dom.config.NVTermConstant;
 import org.nv.dom.config.PageParamType;
 import org.nv.dom.domain.chat.ChatDetail;
 import org.nv.dom.domain.chat.ChatInfo;
 import org.nv.dom.domain.chat.OfflineChat;
 import org.nv.dom.domain.settlement.Settlement;
 import org.nv.dom.domain.speech.OfflineMessage;
+import org.nv.dom.util.ConfigUtil;
+import org.nv.dom.util.HttpClientUtil;
+import org.nv.dom.util.ThreadUtils;
 import org.nv.dom.util.json.JacksonJSONUtils;
 import org.nv.dom.web.dao.user.UserMapper;
 import org.nv.dom.web.service.UserService;
 import org.nv.dom.websocket.util.SessionUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+
+import com.alibaba.fastjson.JSON;
 
 @Service("userServiceImpl")
 public class UserServiceImpl implements UserService {
@@ -56,17 +62,28 @@ public class UserServiceImpl implements UserService {
 	}
 
 	@Override
-	public Map<String, Object> sendMessage(ChatDetail chatDetail) {
+	public Map<String, Object> sendMessage(final ChatDetail chatDetail) {
 		Map<String, Object> result = new HashMap<String, Object>();
 		chatDetail.setCreateTime(new SimpleDateFormat("yyyy/MM/dd HH:mm:ss").format(new Date()));
 		try{
-			chatDetail.setMessage("chat");
-			if(!SessionUtils.pushMessage(chatDetail.getToUserId(),JacksonJSONUtils.beanToJSON(chatDetail))){
-				chatDetail.setIsRead(0);
-			} else {
-				chatDetail.setIsRead(1);
-			}
-			userMapper.saveMessage(chatDetail);
+			ThreadUtils.fixedPool.execute(new Runnable() {
+				@Override
+				public void run() {
+					if(chatDetail.getToUserId() == NVTermConstant.ADMINISTRATOR){
+						HttpClientUtil.doPostJson("http://"+ConfigUtil.getVersionConfigProperty("judger.server")+"/autoSettlement", 
+								JSON.toJSONString(chatDetail));	
+					} else {
+						chatDetail.setMessage("chat");
+						if(!SessionUtils.pushMessage(chatDetail.getToUserId(),JSON.toJSONString(chatDetail))){
+							chatDetail.setIsRead(0);
+						} else {
+							chatDetail.setIsRead(1);
+						}
+						
+					}	
+					userMapper.saveMessage(chatDetail);	
+				}
+			});		
 			result.put("chatDetail", chatDetail);
 			result.put(PageParamType.BUSINESS_STATUS, 1);
 			result.put(PageParamType.BUSINESS_MESSAGE, "消息发送成功");
