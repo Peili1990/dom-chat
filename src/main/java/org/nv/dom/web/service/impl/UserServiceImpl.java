@@ -139,7 +139,7 @@ public class UserServiceImpl implements UserService {
 				result.put(PageParamType.BUSINESS_MESSAGE, "保存离线发言成功");
 			}else{
 				result.put(PageParamType.BUSINESS_STATUS, -3);
-				result.put(PageParamType.BUSINESS_MESSAGE, "离线发言未保存");
+				result.put(PageParamType.BUSINESS_MESSAGE, "有新的集会发言");
 			}	
 		}catch(Exception e){
 			logger.error(e.getMessage(), e);
