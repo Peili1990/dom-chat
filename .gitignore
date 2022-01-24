@@ -1,1 +1,14 @@
+.classpath
+.project
+.settings/
+.gitignore
+logs/
 /target/
+/.idea/
+.idea/
+*.iml
+/web/target
+/api/target
+market-seller-web/target/
+market-seller-api/target/
+static/
