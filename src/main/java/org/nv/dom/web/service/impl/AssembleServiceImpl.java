@@ -5,6 +5,7 @@ import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.TimeZone;
 
 import org.apache.log4j.Logger;
 import org.nv.dom.config.NVTermConstant;
@@ -51,7 +52,10 @@ public class AssembleServiceImpl implements AssembleService {
 				}
 				speech.setContent(TextUtil.Stammer(speech.getContent()));
 			}
-			speech.setCreateTime(new SimpleDateFormat("yyyy/MM/dd HH:mm:ss").format(new Date()));
+			SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+
+			sdf.setTimeZone(TimeZone.getTimeZone("GMT+8"));
+			speech.setCreateTime(sdf.format(new Date()));
 			assembleMapper.saveSpeech(speech);
 			result.put(PageParamType.BUSINESS_STATUS, 1);
 			result.put(PageParamType.BUSINESS_MESSAGE, "保存发言成功！");
